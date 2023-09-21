@@ -20,6 +20,7 @@ public class Tree {
         this.parent = parent;
         numDimensions = calcDimensions();
         closestNode = -1;
+        isLeaf = false;
     }
 
     private int calcDimensions() {
@@ -30,6 +31,11 @@ public class Tree {
             }
         }
         return result;
+    }
+
+    public void setClosestNode (int node) {
+        closestNode = node;
+        isLeaf = true;
     }
 
     public void propagate(boolean a) {
@@ -43,7 +49,19 @@ public class Tree {
     }
 
     private void createChildren() {
+        boolean[] flat = new boolean[variables.length];
+        for (int i = 0; i < variables.length; i++) {
+            if (variables[i][0] == variables[i][1]) {
+                flat[i] = true;
+            }
+            else {
+                flat[i] = false;
+            }
+        }
+    }
 
+    private ArrayList<Tree> getChildren() {
+        return children;
     }
 
 }

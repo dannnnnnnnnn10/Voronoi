@@ -2,7 +2,7 @@ package VoronoiTree;
 
 import java.util.ArrayList;
 
-public class Voronoi3D {
+public class VoronoiTree {
 
     private int xLength;
     private int yLength;
@@ -10,7 +10,7 @@ public class Voronoi3D {
     private ArrayList<Node> nodes;
     private int[][][] grid;
 
-    public Voronoi3D(int xLength, int yLength, int zLength) {
+    public VoronoiTree(int xLength, int yLength, int zLength) {
         this.xLength = xLength;
         this.yLength = yLength;
         this.zLength = zLength;

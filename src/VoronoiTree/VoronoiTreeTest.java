@@ -4,15 +4,15 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class Voronoi3DTest {
+public class VoronoiTreeTest {
 
     @Test
     public void testOneNodeEven() {
-        Voronoi3D test = new Voronoi3D(2, 2, 2);
+        VoronoiTree test = new VoronoiTree(2, 2, 2);
         test.addNode(1, 1, 1);
-        Voronoi3D test2 = new Voronoi3D(2, 2, 2);
+        VoronoiTree test2 = new VoronoiTree(2, 2, 2);
         test2.addNode(1, 1, 1);
-        Voronoi3D brute = new Voronoi3D(2, 2, 2);
+        VoronoiTree brute = new VoronoiTree(2, 2, 2);
         brute.addNode(1, 1, 1);
         brute.bruteForce();
         String s = brute.print();
@@ -24,11 +24,11 @@ public class Voronoi3DTest {
 
     @Test
     public void testOneNodeOddX() {
-        Voronoi3D test = new Voronoi3D(3, 2, 2);
+        VoronoiTree test = new VoronoiTree(3, 2, 2);
         test.addNode(1, 1, 1);
-        Voronoi3D test2 = new Voronoi3D(3, 2, 2);
+        VoronoiTree test2 = new VoronoiTree(3, 2, 2);
         test2.addNode(1, 1, 1);
-        Voronoi3D brute = new Voronoi3D(3, 2, 2);
+        VoronoiTree brute = new VoronoiTree(3, 2, 2);
         brute.addNode(1, 1, 1);
         brute.bruteForce();
         String s = brute.print();
@@ -40,11 +40,11 @@ public class Voronoi3DTest {
 
     @Test
     public void testOneNodeOddY() {
-        Voronoi3D test = new Voronoi3D(2, 3, 2);
+        VoronoiTree test = new VoronoiTree(2, 3, 2);
         test.addNode(1, 1, 1);
-        Voronoi3D test2 = new Voronoi3D(2, 3, 2);
+        VoronoiTree test2 = new VoronoiTree(2, 3, 2);
         test2.addNode(1, 1, 1);
-        Voronoi3D brute = new Voronoi3D(2, 3, 2);
+        VoronoiTree brute = new VoronoiTree(2, 3, 2);
         brute.addNode(1, 1, 1);
         brute.bruteForce();
         String s = brute.print();
@@ -56,11 +56,11 @@ public class Voronoi3DTest {
 
     @Test
     public void testOneNodeOddZ() {
-        Voronoi3D test = new Voronoi3D(2, 2, 3);
+        VoronoiTree test = new VoronoiTree(2, 2, 3);
         test.addNode(1, 1, 1);
-        Voronoi3D test2 = new Voronoi3D(2, 2, 3);
+        VoronoiTree test2 = new VoronoiTree(2, 2, 3);
         test2.addNode(1, 1, 1);
-        Voronoi3D brute = new Voronoi3D(2, 2, 3);
+        VoronoiTree brute = new VoronoiTree(2, 2, 3);
         brute.addNode(1, 1, 1);
         brute.bruteForce();
         String s = brute.print();
@@ -72,11 +72,11 @@ public class Voronoi3DTest {
 
     @Test
     public void testOneNodeOddXY() {
-        Voronoi3D test = new Voronoi3D(3, 3, 2);
+        VoronoiTree test = new VoronoiTree(3, 3, 2);
         test.addNode(1, 1, 1);
-        Voronoi3D test2 = new Voronoi3D(3, 3, 2);
+        VoronoiTree test2 = new VoronoiTree(3, 3, 2);
         test2.addNode(1, 1, 1);
-        Voronoi3D brute = new Voronoi3D(3, 3, 2);
+        VoronoiTree brute = new VoronoiTree(3, 3, 2);
         brute.addNode(1, 1, 1);
         brute.bruteForce();
         String s = brute.print();
@@ -88,11 +88,11 @@ public class Voronoi3DTest {
 
     @Test
     public void testOneNodeOddXZ() {
-        Voronoi3D test = new Voronoi3D(3, 2, 3);
+        VoronoiTree test = new VoronoiTree(3, 2, 3);
         test.addNode(1, 1, 1);
-        Voronoi3D test2 = new Voronoi3D(3, 2, 3);
+        VoronoiTree test2 = new VoronoiTree(3, 2, 3);
         test2.addNode(1, 1, 1);
-        Voronoi3D brute = new Voronoi3D(3, 2, 3);
+        VoronoiTree brute = new VoronoiTree(3, 2, 3);
         brute.addNode(1, 1, 1);
         brute.bruteForce();
         String s = brute.print();
@@ -104,11 +104,11 @@ public class Voronoi3DTest {
 
     @Test
     public void testOneNodeOddYZ() {
-        Voronoi3D test = new Voronoi3D(2, 3, 3);
+        VoronoiTree test = new VoronoiTree(2, 3, 3);
         test.addNode(1, 1, 1);
-        Voronoi3D test2 = new Voronoi3D(2, 3, 3);
+        VoronoiTree test2 = new VoronoiTree(2, 3, 3);
         test2.addNode(1, 1, 1);
-        Voronoi3D brute = new Voronoi3D(2, 3, 3);
+        VoronoiTree brute = new VoronoiTree(2, 3, 3);
         brute.addNode(1, 1, 1);
         brute.bruteForce();
         String s = brute.print();
@@ -120,11 +120,11 @@ public class Voronoi3DTest {
 
     @Test
     public void testOneNodeOddXYZ() {
-        Voronoi3D test = new Voronoi3D(3, 3, 3);
+        VoronoiTree test = new VoronoiTree(3, 3, 3);
         test.addNode(1, 1, 1);
-        Voronoi3D test2 = new Voronoi3D(3, 3, 3);
+        VoronoiTree test2 = new VoronoiTree(3, 3, 3);
         test2.addNode(1, 1, 1);
-        Voronoi3D brute = new Voronoi3D(3, 3, 3);
+        VoronoiTree brute = new VoronoiTree(3, 3, 3);
         brute.addNode(1, 1, 1);
         brute.bruteForce();
         String s = brute.print();
@@ -136,13 +136,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testBoundaryTwoNodesEven() {
-        Voronoi3D test = new Voronoi3D(2, 2, 2);
+        VoronoiTree test = new VoronoiTree(2, 2, 2);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(2, 2, 2);
+        VoronoiTree test2 = new VoronoiTree(2, 2, 2);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(2, 2, 2);
+        VoronoiTree brute = new VoronoiTree(2, 2, 2);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -155,13 +155,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testBoundaryTwoNodesOddX() {
-        Voronoi3D test = new Voronoi3D(3, 2, 2);
+        VoronoiTree test = new VoronoiTree(3, 2, 2);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(3, 2, 2);
+        VoronoiTree test2 = new VoronoiTree(3, 2, 2);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(3, 2, 2);
+        VoronoiTree brute = new VoronoiTree(3, 2, 2);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -174,13 +174,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testBoundaryTwoNodesOddY() {
-        Voronoi3D test = new Voronoi3D(2, 3, 2);
+        VoronoiTree test = new VoronoiTree(2, 3, 2);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(2, 3, 2);
+        VoronoiTree test2 = new VoronoiTree(2, 3, 2);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(2, 3, 2);
+        VoronoiTree brute = new VoronoiTree(2, 3, 2);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -193,13 +193,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testBoundaryTwoNodesOddZ() {
-        Voronoi3D test = new Voronoi3D(2, 2, 3);
+        VoronoiTree test = new VoronoiTree(2, 2, 3);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(2, 2, 3);
+        VoronoiTree test2 = new VoronoiTree(2, 2, 3);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(2, 2, 3);
+        VoronoiTree brute = new VoronoiTree(2, 2, 3);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -212,13 +212,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testBoundaryTwoNodesOddXY() {
-        Voronoi3D test = new Voronoi3D(3, 3, 2);
+        VoronoiTree test = new VoronoiTree(3, 3, 2);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(3, 3, 2);
+        VoronoiTree test2 = new VoronoiTree(3, 3, 2);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(3, 3, 2);
+        VoronoiTree brute = new VoronoiTree(3, 3, 2);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -231,13 +231,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testBoundaryTwoNodesOddXZ() {
-        Voronoi3D test = new Voronoi3D(3, 2, 3);
+        VoronoiTree test = new VoronoiTree(3, 2, 3);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(3, 2, 3);
+        VoronoiTree test2 = new VoronoiTree(3, 2, 3);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(3, 2, 3);
+        VoronoiTree brute = new VoronoiTree(3, 2, 3);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -250,13 +250,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testBoundaryTwoNodesOddYZ() {
-        Voronoi3D test = new Voronoi3D(2, 3, 3);
+        VoronoiTree test = new VoronoiTree(2, 3, 3);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(2, 3, 3);
+        VoronoiTree test2 = new VoronoiTree(2, 3, 3);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(2, 3, 3);
+        VoronoiTree brute = new VoronoiTree(2, 3, 3);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -269,13 +269,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testBoundaryTwoNodesOddXYZ() {
-        Voronoi3D test = new Voronoi3D(3, 3, 3);
+        VoronoiTree test = new VoronoiTree(3, 3, 3);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(3, 3, 3);
+        VoronoiTree test2 = new VoronoiTree(3, 3, 3);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(3, 3, 3);
+        VoronoiTree brute = new VoronoiTree(3, 3, 3);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -288,13 +288,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testTwoNodesEven() {
-        Voronoi3D test = new Voronoi3D(4, 4, 4);
+        VoronoiTree test = new VoronoiTree(4, 4, 4);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(4, 4, 4);
+        VoronoiTree test2 = new VoronoiTree(4, 4, 4);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(4, 4, 4);
+        VoronoiTree brute = new VoronoiTree(4, 4, 4);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -307,13 +307,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testTwoNodesOddX() {
-        Voronoi3D test = new Voronoi3D(5, 4, 4);
+        VoronoiTree test = new VoronoiTree(5, 4, 4);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(5, 4, 4);
+        VoronoiTree test2 = new VoronoiTree(5, 4, 4);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(5, 4, 4);
+        VoronoiTree brute = new VoronoiTree(5, 4, 4);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -326,13 +326,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testTwoNodesOddY() {
-        Voronoi3D test = new Voronoi3D(4, 5, 4);
+        VoronoiTree test = new VoronoiTree(4, 5, 4);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(4, 5, 4);
+        VoronoiTree test2 = new VoronoiTree(4, 5, 4);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(4, 5, 4);
+        VoronoiTree brute = new VoronoiTree(4, 5, 4);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -345,13 +345,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testTwoNodesOddZ() {
-        Voronoi3D test = new Voronoi3D(4, 4, 5);
+        VoronoiTree test = new VoronoiTree(4, 4, 5);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(4, 4, 5);
+        VoronoiTree test2 = new VoronoiTree(4, 4, 5);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(4, 4, 5);
+        VoronoiTree brute = new VoronoiTree(4, 4, 5);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -364,13 +364,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testTwoNodesOddXY() {
-        Voronoi3D test = new Voronoi3D(5, 5, 4);
+        VoronoiTree test = new VoronoiTree(5, 5, 4);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(5, 5, 4);
+        VoronoiTree test2 = new VoronoiTree(5, 5, 4);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(5, 5, 4);
+        VoronoiTree brute = new VoronoiTree(5, 5, 4);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -383,13 +383,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testTwoNodesOddXZ() {
-        Voronoi3D test = new Voronoi3D(5, 4, 5);
+        VoronoiTree test = new VoronoiTree(5, 4, 5);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(5, 4, 5);
+        VoronoiTree test2 = new VoronoiTree(5, 4, 5);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(5, 4, 5);
+        VoronoiTree brute = new VoronoiTree(5, 4, 5);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -402,13 +402,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testTwoNodesOddYZ() {
-        Voronoi3D test = new Voronoi3D(4, 5, 5);
+        VoronoiTree test = new VoronoiTree(4, 5, 5);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(4, 5, 5);
+        VoronoiTree test2 = new VoronoiTree(4, 5, 5);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(4, 5, 5);
+        VoronoiTree brute = new VoronoiTree(4, 5, 5);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -421,13 +421,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testTwoNodesOddXYZ() {
-        Voronoi3D test = new Voronoi3D(5, 5, 5);
+        VoronoiTree test = new VoronoiTree(5, 5, 5);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(5, 5, 5);
+        VoronoiTree test2 = new VoronoiTree(5, 5, 5);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(5, 5, 5);
+        VoronoiTree brute = new VoronoiTree(5, 5, 5);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -440,13 +440,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test2DSplitCaseX() {
-        Voronoi3D test = new Voronoi3D(2, 6, 6);
+        VoronoiTree test = new VoronoiTree(2, 6, 6);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(2, 6, 6);
+        VoronoiTree test2 = new VoronoiTree(2, 6, 6);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(2, 6, 6);
+        VoronoiTree brute = new VoronoiTree(2, 6, 6);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -459,13 +459,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test2DSplitCaseY() {
-        Voronoi3D test = new Voronoi3D(6, 2, 6);
+        VoronoiTree test = new VoronoiTree(6, 2, 6);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(6, 2, 6);
+        VoronoiTree test2 = new VoronoiTree(6, 2, 6);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(6, 2, 6);
+        VoronoiTree brute = new VoronoiTree(6, 2, 6);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -478,13 +478,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test2DSplitCaseZ() {
-        Voronoi3D test = new Voronoi3D(6, 6, 2);
+        VoronoiTree test = new VoronoiTree(6, 6, 2);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(6, 6, 2);
+        VoronoiTree test2 = new VoronoiTree(6, 6, 2);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(6, 6, 2);
+        VoronoiTree brute = new VoronoiTree(6, 6, 2);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -497,13 +497,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test1DSplitCaseX() {
-        Voronoi3D test = new Voronoi3D(6, 2, 2);
+        VoronoiTree test = new VoronoiTree(6, 2, 2);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(6, 2, 2);
+        VoronoiTree test2 = new VoronoiTree(6, 2, 2);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(6, 2, 2);
+        VoronoiTree brute = new VoronoiTree(6, 2, 2);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -516,13 +516,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test1DSplitCaseY() {
-        Voronoi3D test = new Voronoi3D(2, 6, 2);
+        VoronoiTree test = new VoronoiTree(2, 6, 2);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(2, 6, 2);
+        VoronoiTree test2 = new VoronoiTree(2, 6, 2);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(2, 6, 2);
+        VoronoiTree brute = new VoronoiTree(2, 6, 2);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -535,13 +535,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test1DSplitCaseZ() {
-        Voronoi3D test = new Voronoi3D(2, 2, 6);
+        VoronoiTree test = new VoronoiTree(2, 2, 6);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(2, 2, 6);
+        VoronoiTree test2 = new VoronoiTree(2, 2, 6);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(2, 2, 6);
+        VoronoiTree brute = new VoronoiTree(2, 2, 6);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -554,13 +554,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testRoughCut2DSplitCaseX() {
-        Voronoi3D test = new Voronoi3D(3, 6, 6);
+        VoronoiTree test = new VoronoiTree(3, 6, 6);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(3, 6, 6);
+        VoronoiTree test2 = new VoronoiTree(3, 6, 6);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(3, 6, 6);
+        VoronoiTree brute = new VoronoiTree(3, 6, 6);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -573,13 +573,13 @@ public class Voronoi3DTest {
     
     @Test
     public void testRoughCut2DSplitCaseXYandZLength4() {
-        Voronoi3D test = new Voronoi3D(3, 4, 4);
+        VoronoiTree test = new VoronoiTree(3, 4, 4);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(3, 4, 4);
+        VoronoiTree test2 = new VoronoiTree(3, 4, 4);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(3, 4, 4);
+        VoronoiTree brute = new VoronoiTree(3, 4, 4);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -592,13 +592,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testRoughCut2DSplitCaseY() {
-        Voronoi3D test = new Voronoi3D(6, 3, 6);
+        VoronoiTree test = new VoronoiTree(6, 3, 6);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(6, 3, 6);
+        VoronoiTree test2 = new VoronoiTree(6, 3, 6);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(6, 3, 6);
+        VoronoiTree brute = new VoronoiTree(6, 3, 6);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -611,13 +611,13 @@ public class Voronoi3DTest {
     
     @Test
     public void testRoughCut2DSplitCaseYXandZLength4() {
-        Voronoi3D test = new Voronoi3D(4, 3, 4);
+        VoronoiTree test = new VoronoiTree(4, 3, 4);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(4, 3, 4);
+        VoronoiTree test2 = new VoronoiTree(4, 3, 4);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(4, 3, 4);
+        VoronoiTree brute = new VoronoiTree(4, 3, 4);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -630,13 +630,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testRoughCut2DSplitCaseZ() {
-        Voronoi3D test = new Voronoi3D(6, 6, 3);
+        VoronoiTree test = new VoronoiTree(6, 6, 3);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(6, 6, 3);
+        VoronoiTree test2 = new VoronoiTree(6, 6, 3);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(6, 6, 3);
+        VoronoiTree brute = new VoronoiTree(6, 6, 3);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -649,13 +649,13 @@ public class Voronoi3DTest {
     
     @Test
     public void testRoughCut2DSplitCaseZXandYLength4() {
-        Voronoi3D test = new Voronoi3D(4, 4, 3);
+        VoronoiTree test = new VoronoiTree(4, 4, 3);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(4, 4, 3);
+        VoronoiTree test2 = new VoronoiTree(4, 4, 3);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(4, 4, 3);
+        VoronoiTree brute = new VoronoiTree(4, 4, 3);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -668,13 +668,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testRoughCut1DSplitCaseX() {
-        Voronoi3D test = new Voronoi3D(6, 3, 3);
+        VoronoiTree test = new VoronoiTree(6, 3, 3);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(6, 3, 3);
+        VoronoiTree test2 = new VoronoiTree(6, 3, 3);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(6, 3, 3);
+        VoronoiTree brute = new VoronoiTree(6, 3, 3);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -687,13 +687,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testRoughCut1DSplitCaseY() {
-        Voronoi3D test = new Voronoi3D(3, 6, 3);
+        VoronoiTree test = new VoronoiTree(3, 6, 3);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(3, 6, 3);
+        VoronoiTree test2 = new VoronoiTree(3, 6, 3);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(3, 6, 3);
+        VoronoiTree brute = new VoronoiTree(3, 6, 3);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -706,13 +706,13 @@ public class Voronoi3DTest {
 
     @Test
     public void testRoughCut1DSplitCaseZ() {
-        Voronoi3D test = new Voronoi3D(3, 3, 6);
+        VoronoiTree test = new VoronoiTree(3, 3, 6);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(3, 3, 6);
+        VoronoiTree test2 = new VoronoiTree(3, 3, 6);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(3, 3, 6);
+        VoronoiTree brute = new VoronoiTree(3, 3, 6);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -725,13 +725,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test2DRoughCutFlatXYis3() {
-        Voronoi3D test = new Voronoi3D(2, 6, 8);
+        VoronoiTree test = new VoronoiTree(2, 6, 8);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(2, 6, 8);
+        VoronoiTree test2 = new VoronoiTree(2, 6, 8);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(2, 6, 8);
+        VoronoiTree brute = new VoronoiTree(2, 6, 8);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -744,13 +744,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test2DRoughCutFlatXZis3() {
-        Voronoi3D test = new Voronoi3D(2, 8, 6);
+        VoronoiTree test = new VoronoiTree(2, 8, 6);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(2, 8, 6);
+        VoronoiTree test2 = new VoronoiTree(2, 8, 6);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(2, 8, 6);
+        VoronoiTree brute = new VoronoiTree(2, 8, 6);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -763,13 +763,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test2DRoughCutFlatYXis3() {
-        Voronoi3D test = new Voronoi3D(6, 2, 8);
+        VoronoiTree test = new VoronoiTree(6, 2, 8);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(6, 2, 8);
+        VoronoiTree test2 = new VoronoiTree(6, 2, 8);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(6, 2, 8);
+        VoronoiTree brute = new VoronoiTree(6, 2, 8);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -782,13 +782,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test2DRoughCutFlatYZis3() {
-        Voronoi3D test = new Voronoi3D(8, 2, 6);
+        VoronoiTree test = new VoronoiTree(8, 2, 6);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(8, 2, 6);
+        VoronoiTree test2 = new VoronoiTree(8, 2, 6);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(8, 2, 6);
+        VoronoiTree brute = new VoronoiTree(8, 2, 6);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -801,13 +801,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test2DRoughCutFlatZXis3() {
-        Voronoi3D test = new Voronoi3D(6, 8, 2);
+        VoronoiTree test = new VoronoiTree(6, 8, 2);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(6, 8, 2);
+        VoronoiTree test2 = new VoronoiTree(6, 8, 2);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(6, 8, 2);
+        VoronoiTree brute = new VoronoiTree(6, 8, 2);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();
@@ -820,13 +820,13 @@ public class Voronoi3DTest {
 
     @Test
     public void test2DRoughCutFlatZYis3() {
-        Voronoi3D test = new Voronoi3D(8, 6, 2);
+        VoronoiTree test = new VoronoiTree(8, 6, 2);
         test.addNode(1, 1, 1);
         test.addNode(0, 0, 0);
-        Voronoi3D test2 = new Voronoi3D(8, 6, 2);
+        VoronoiTree test2 = new VoronoiTree(8, 6, 2);
         test2.addNode(1, 1, 1);
         test2.addNode(0, 0, 0);
-        Voronoi3D brute = new Voronoi3D(8, 6, 2);
+        VoronoiTree brute = new VoronoiTree(8, 6, 2);
         brute.addNode(1, 1, 1);
         brute.addNode(0, 0, 0);
         brute.bruteForce();

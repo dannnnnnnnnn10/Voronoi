@@ -155,7 +155,7 @@ public class RandomGen {
         long startTime;
         long endTime;
         long duration;
-        Voronoi3D test = new Voronoi3D(x, y, z);
+        VoronoiTree test = new VoronoiTree(x, y, z);
         for (int i = 0; i < nodes.size(); i++) {
             test.addNode(nodes.get(i));
         }
@@ -170,7 +170,7 @@ public class RandomGen {
         long startTime;
         long endTime;
         long duration;
-        Voronoi3D test = new Voronoi3D(x, y, z);
+        VoronoiTree test = new VoronoiTree(x, y, z);
         for (int i = 0; i < nodes.size(); i++) {
             test.addNode(nodes.get(i));
         }
@@ -185,7 +185,7 @@ public class RandomGen {
         long startTime;
         long endTime;
         long duration;
-        Voronoi3D test = new Voronoi3D(x, y, z);
+        VoronoiTree test = new VoronoiTree(x, y, z);
         for (int i = 0; i < nodes.size(); i++) {
             test.addNode(nodes.get(i));
         }
