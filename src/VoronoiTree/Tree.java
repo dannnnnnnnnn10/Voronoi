@@ -7,22 +7,16 @@ public class Tree {
     private Tree parent;
     private ArrayList<Tree> children;
     private int numDimensions;
-    private int x1;
-    private int x2;
-    private int y1;
-    private int y2;
-    private int z1;
-    private int z2;
-    private boolean allTheSame;
+    private int[][] variables;
+    private boolean isLeaf;
     private int closestNode;
 
-    public Tree(int x1, int x2, int y1, int y2, int z1, int z2, Tree parent) {
-        this.x1 = x1;
-        this.x2 = x2;
-        this.y1 = y1;
-        this.y2 = y2;
-        this.z1 = z1;
-        this.z2 = z2;
+    public Tree(int[][] vars, Tree parent) {
+        variables = new int[vars.length][2];
+        for (int i = 0; i < vars.length; i++) {
+            variables[i][0] = vars[i][0];
+            variables[i][1] = vars[i][1];
+        }
         this.parent = parent;
         numDimensions = calcDimensions();
         closestNode = -1;
@@ -30,20 +24,16 @@ public class Tree {
 
     private int calcDimensions() {
         int result = 0;
-        if (x1 != x2) {
-            result++;
-        }
-        if (y1 != y2) {
-            result++;
-        }
-        if (z1 != z2) {
-            result++;
+        for (int i = 0; i < variables.length; i++) {
+            if (variables[i][0] == variables[i][1]) {
+                result++;
+            }
         }
         return result;
     }
 
     public void propagate(boolean a) {
-        allTheSame = a;
+        isLeaf = a;
         if (a = true) {
             children = null;
         }
