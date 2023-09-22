@@ -1,4 +1,4 @@
-package VoronoiTree;
+package Voronoi3D;
 
 import java.util.ArrayList;
 

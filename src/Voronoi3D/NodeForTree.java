@@ -1,10 +1,10 @@
-package VoronoiTree;
+package Voronoi3D;
 
-public class Node {
+public class NodeForTree {
 
     private int[] vars;
 
-    public Node(int[] vars) {
+    public NodeForTree(int[] vars) {
         this.vars = vars;
     }
 

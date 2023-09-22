@@ -1,11 +1,11 @@
-package VoronoiTree;
+package Voronoi3D;
 
 import java.util.ArrayList;
 
 public class VoronoiTree {
 
     private int[] lengths;
-    private ArrayList<Node> nodes;
+    private ArrayList<NodeForTree> nodeForTrees;
     private Tree tree;
 
     public VoronoiTree(int[] lengths) {
@@ -16,21 +16,21 @@ public class VoronoiTree {
             vars[i][1] = lengths[i];
         }
         tree = new Tree(vars, null);
-        this.nodes = new ArrayList<Node>();
+        this.nodeForTrees = new ArrayList<NodeForTree>();
     }
 
     public void addNode(int[] vars) {
-        nodes.add(new Node(vars));
+        nodeForTrees.add(new NodeForTree(vars));
     }
 
-    public void addNode(Node node) {
-        nodes.add(node);
+    public void addNode(NodeForTree nodeForTree) {
+        nodeForTrees.add(nodeForTree);
     }
 
-    private double calcDistance(int[] vars, Node node) {
+    private double calcDistance(int[] vars, NodeForTree nodeForTree) {
         double sum = 0;
         for (int i = 0; i < vars.length; i++) {
-            sum += Math.pow(Math.abs(vars[i] - node.getVars()[i]), 2);
+            sum += Math.pow(Math.abs(vars[i] - nodeForTree.getVars()[i]), 2);
         }
         double distance = Math.pow(sum, 0.5);
         return distance;
@@ -39,8 +39,8 @@ public class VoronoiTree {
     private int getClosestNode(int[] vars) {
         double dist = -1;
         int closestNode = -1;
-        for (int a = 0; a < nodes.size(); a++) {
-            double newDist = calcDistance(vars, nodes.get(a));
+        for (int a = 0; a < nodeForTrees.size(); a++) {
+            double newDist = calcDistance(vars, nodeForTrees.get(a));
             if (dist == -1) {
                 closestNode = a;
                 dist = newDist;
