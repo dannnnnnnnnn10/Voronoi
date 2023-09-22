@@ -24,6 +24,10 @@ public class Node {
         return z;
     }
 
+    public int[] nodeConversion() {
+        return new int[]{x, y, z};
+    }
+
     public String toString() {
         return "" + x + ", " + y +", " + z;
     }

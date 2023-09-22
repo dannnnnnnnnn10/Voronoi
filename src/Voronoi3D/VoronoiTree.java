@@ -84,14 +84,28 @@ public class VoronoiTree {
 
 
     public static void main(String[] args) {
-        int[] lengths = {6, 6, 6, 1000000};
+        int[] lengths = {2190, 3476, 5480};
         VoronoiTree test = new VoronoiTree(lengths);
-        int[] node = {1, 1, 1, 532};
-        int[] node2 = {3, 2, 5, 727};
+        int[] node = {1, 1, 1};
+        int[] node2 = {376, 55, 234};
+        int[] node3 = {35, 234, 5};
+        int[] node4 = {1233, 2, 5};
+        int[] node5 = {3, 24, 5};
+        int[] node6 = {3, 2, 56};
         test.addNode(node);
         test.addNode(node2);
+        test.addNode(node3);
+        test.addNode(node4);
+        test.addNode(node5);
+        test.addNode(node6);
+        long startTime;
+        long endTime;
+        long duration;
+        startTime = System.nanoTime();
         test.solve();
-        System.out.println(test.print());
+        endTime = System.nanoTime();
+        duration = (endTime - startTime) / 1000000;
+        System.out.println("Tree took " + duration +" ms");
     }
 //    public static void main(String[] args) {
 //        long startTime;
