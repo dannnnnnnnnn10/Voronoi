@@ -2,29 +2,22 @@ package VoronoiTree;
 
 public class Node {
 
-    private int x;
-    private int y;
-    private int z;
+    private int[] vars;
 
-    public Node(int x, int y, int z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    public Node(int[] vars) {
+        this.vars = vars;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public int getZ() {
-        return z;
+    public int[] getVars() {
+        return vars;
     }
 
     public String toString() {
-        return "" + x + ", " + y +", " + z;
+        String result = "";
+        for (int i = 0; i + 1 < vars.length; i ++) {
+            result += vars[i] + ", ";
+        }
+        result += vars[vars.length - 1] + "\n";
+        return result;
     }
 }
