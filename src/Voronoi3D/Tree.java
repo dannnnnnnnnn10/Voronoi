@@ -4,29 +4,23 @@ import java.util.ArrayList;
 
 public class Tree {
 
-    private Tree parent;
     private ArrayList<Tree> children;
-    private int numDimensions;
     private int[][] variables;
     private boolean isLeaf;
     private int closestNode;
     private boolean[] flat;
     private ArrayList<int[][]> childVarList;
-    private int numCorners;
     private ArrayList<int[]> corners;
 
-    public Tree(int[][] vars, Tree parent) {
+    public Tree(int[][] vars) {
         variables = new int[vars.length][2];
         for (int i = 0; i < vars.length; i++) {
             variables[i][0] = vars[i][0];
             variables[i][1] = vars[i][1];
         }
-        this.parent = parent;
-        numDimensions = calcDimensions();
         closestNode = -1;
         isLeaf = false;
         children = new ArrayList<Tree>();
-        numCorners = (int)Math.pow(2, variables.length);
         corners = new ArrayList<int[]>();
         int[] listBuilder = new int[variables.length];
         findCorners(listBuilder, 0);
@@ -65,9 +59,43 @@ public class Tree {
     private void createChildren() {
         childVarList = new ArrayList<int[][]>();
         int [][] listBuilder = new int[variables.length][2];
-        populateChildList(listBuilder, 0);
+        if (variables.length == 3) {
+            int xLow = variables[0][0];
+            int xHigh = variables[0][1];
+            int yLow = variables[1][0];
+            int yHigh = variables[1][1];
+            int zLow = variables[2][0];
+            int zHigh = variables[2][1];
+            int xMid = xLow + (xHigh - xLow)/2;
+            int xMid2 = xMid+1;
+            if (xMid == xHigh) {
+                xMid2--;
+            }
+            int yMid = yLow + (yHigh - yLow)/2;
+            int yMid2 = yMid+1;
+            if (yMid == yHigh) {
+                yMid2--;
+            }
+            int zMid = zLow + (zHigh - zLow)/2;
+            int zMid2 = zMid+1;
+            if (zMid == zHigh) {
+                zMid2--;
+            }
+            childVarList.add(new int[][]{new int[]{xLow, xMid}, new int[]{yLow, yMid}, new int[]{zLow, zMid}});
+            childVarList.add(new int[][]{new int[]{xMid2, xHigh}, new int[]{yLow, yMid}, new int[]{zLow, zMid}});
+            childVarList.add(new int[][]{new int[]{xLow, xMid}, new int[]{yMid2, yHigh}, new int[]{zLow, zMid}});
+            childVarList.add(new int[][]{new int[]{xLow, xMid}, new int[]{yLow, yMid}, new int[]{zMid2, zHigh}});
+            childVarList.add(new int[][]{new int[]{xMid2, xHigh}, new int[]{yMid2, yHigh}, new int[]{zLow, zMid}});
+            childVarList.add(new int[][]{new int[]{xLow, xMid}, new int[]{yMid2, yHigh}, new int[]{zMid2, zHigh}});
+            childVarList.add(new int[][]{new int[]{xMid2, xHigh}, new int[]{yLow, yMid}, new int[]{zMid2, zHigh}});
+            childVarList.add(new int[][]{new int[]{xMid2, xHigh}, new int[]{yMid2, yHigh}, new int[]{zMid2, zHigh}});
+        }
+        else {
+            calcDimensions();
+            populateChildList(listBuilder, 0);
+        }
         for (int[][] c : childVarList) {
-            children.add(new Tree(c, this));
+            children.add(new Tree(c));
         }
     }
 
@@ -107,19 +135,34 @@ public class Tree {
     }
 
     private void findCorners(int[] list, int depth) {
+        if (variables.length == 3) {
+            corners.add(new int[]{variables[0][0], variables[1][0], variables[2][0]});
+            corners.add(new int[]{variables[0][1], variables[1][0], variables[2][0]});
+            corners.add(new int[]{variables[0][0], variables[1][1], variables[2][0]});
+            corners.add(new int[]{variables[0][0], variables[1][0], variables[2][1]});
+            corners.add(new int[]{variables[0][1], variables[1][1], variables[2][0]});
+            corners.add(new int[]{variables[0][0], variables[1][1], variables[2][1]});
+            corners.add(new int[]{variables[0][1], variables[1][0], variables[2][1]});
+            corners.add(new int[]{variables[0][1], variables[1][1], variables[2][1]});
+        }
+        else {
+            findCornersRecursive(list, depth);
+        }
+    }
+
+    private void findCornersRecursive(int[] list, int depth) {
         int[] b = new int[variables.length];
         for (int i = 0; i < b.length; i++) {
             b[i] = list[i];
         }
         if (depth == variables.length) {
             corners.add(b);
-            return;
         }
         else {
             b[depth] = variables[depth][0];
-            findCorners(b, depth+1);
+            findCornersRecursive(b, depth+1);
             b[depth] = variables[depth][1];
-            findCorners(b, depth+1);
+            findCornersRecursive(b, depth+1);
         }
     }
 

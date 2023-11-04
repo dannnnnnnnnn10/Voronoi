@@ -299,7 +299,7 @@ public class RandomGen {
 //        Scanner scan = new Scanner(System.in);
 //        System.out.println("How many test runs would you like to do?");
 //        int n = scan.nextInt();
-        RandomGen test = new RandomGen(1, 10);
+        RandomGen test = new RandomGen(2, 10);
         System.out.println(test.compareSolutions());
 //        RandomGen test;
 //        int bruteWins = 0;

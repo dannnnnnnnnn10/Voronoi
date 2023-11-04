@@ -15,7 +15,7 @@ public class VoronoiTree {
             vars[i][0] = 0;
             vars[i][1] = lengths[i];
         }
-        tree = new Tree(vars, null);
+        tree = new Tree(vars);
         this.nodeForTrees = new ArrayList<NodeForTree>();
     }
 
@@ -84,7 +84,7 @@ public class VoronoiTree {
 
 
     public static void main(String[] args) {
-        int[] lengths = {2190, 3476, 5480};
+        int[] lengths = {2190, 476, 480};
         VoronoiTree test = new VoronoiTree(lengths);
         int[] node = {1, 1, 1};
         int[] node2 = {376, 55, 234};
