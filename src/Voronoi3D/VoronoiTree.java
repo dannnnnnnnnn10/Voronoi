@@ -4,12 +4,11 @@ import java.util.ArrayList;
 
 public class VoronoiTree {
 
-    private int[] lengths;
     private ArrayList<NodeForTree> nodeForTrees;
     private Tree tree;
+    private ArrayList<String> results;
 
     public VoronoiTree(int[] lengths) {
-        this.lengths = lengths;
         int[][] vars = new int[lengths.length][2];
         for (int i = 0; i < lengths.length; i++) {
             vars[i][0] = 0;
@@ -17,6 +16,7 @@ public class VoronoiTree {
         }
         tree = new Tree(vars);
         this.nodeForTrees = new ArrayList<NodeForTree>();
+        results = new ArrayList<>();
     }
 
     public void addNode(int[] vars) {
@@ -67,28 +67,31 @@ public class VoronoiTree {
                 break;
             }
         }
-        t.propagate(same);
         if (!same) {
-            for (Tree a : t.getChildren()) {
+            ArrayList<Tree> children = t.propagate();
+            for (Tree a : children) {
                 recursiveSolve(a);
             }
         }
         else {
             t.setClosestNode(firstNode);
+//            results.add(t.toString());
         }
     }
 
-    public String print() {
-        return tree.toString();
+    public void print() {
+        for (String r : results) {
+            System.out.println(r);
+        };
     }
 
 
     public static void main(String[] args) {
-        int[] lengths = {2190, 476, 480};
+        int[] lengths = {2108, 4776, 4800};
         VoronoiTree test = new VoronoiTree(lengths);
         int[] node = {1, 1, 1};
         int[] node2 = {376, 55, 234};
-        int[] node3 = {35, 234, 5};
+        int[] node3 = {35, 234, 3501};
         int[] node4 = {1233, 2, 5};
         int[] node5 = {3, 24, 5};
         int[] node6 = {3, 2, 56};
