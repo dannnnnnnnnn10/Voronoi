@@ -1,12 +1,15 @@
 package Voronoi3D;
 
 import java.util.ArrayList;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class VoronoiTree {
 
     private ArrayList<NodeForTree> nodeForTrees;
     private Tree tree;
     private ArrayList<String> results;
+
+    private ConcurrentLinkedQueue<Tree> queue;
 
     public VoronoiTree(int[] lengths) {
         int[][] vars = new int[lengths.length][2];
@@ -15,8 +18,11 @@ public class VoronoiTree {
             vars[i][1] = lengths[i];
         }
         tree = new Tree(vars);
-        this.nodeForTrees = new ArrayList<NodeForTree>();
+        this.nodeForTrees = new ArrayList<>();
         results = new ArrayList<>();
+
+        queue = new ConcurrentLinkedQueue<>();
+        queue.add(tree);
     }
 
     public void addNode(int[] vars) {
@@ -32,8 +38,7 @@ public class VoronoiTree {
         for (int i = 0; i < vars.length; i++) {
             sum += Math.pow(Math.abs(vars[i] - nodeForTree.getVars()[i]), 2);
         }
-        double distance = Math.pow(sum, 0.5);
-        return distance;
+        return Math.pow(sum, 0.5);
     }
 
     private int getClosestNode(int[] vars) {
@@ -55,6 +60,12 @@ public class VoronoiTree {
 
     public void solve() {
         recursiveSolve(tree);
+    }
+
+    public void baseQueueSolve() {
+        while (!queue.isEmpty()){
+            queueSolve(queue.poll());
+        }
     }
 
     private void recursiveSolve(Tree t) {
@@ -79,22 +90,41 @@ public class VoronoiTree {
         }
     }
 
+    private void queueSolve(Tree t) {
+        ArrayList<int[]> corners = t.getCorners();
+        boolean same = true;
+        int firstNode = getClosestNode(corners.get(0));
+        for (int i = 1; i < corners.size(); i++) {
+            if (getClosestNode(corners.get(i)) != firstNode) {
+                same = false;
+                break;
+            }
+        }
+        if (!same) {
+            queue.addAll(t.propagate());
+        }
+        else {
+            t.setClosestNode(firstNode);
+//            results.add(t.toString());
+        }
+    }
+
     public void print() {
         for (String r : results) {
             System.out.println(r);
-        };
+        }
     }
 
 
     public static void main(String[] args) {
-        int[] lengths = {2108, 4776, 4800};
+        int[] lengths = {219, 476, 480};
         VoronoiTree test = new VoronoiTree(lengths);
         int[] node = {1, 1, 1};
         int[] node2 = {376, 55, 234};
-        int[] node3 = {35, 234, 3501};
-        int[] node4 = {1233, 2, 5};
+        int[] node3 = {35, 234, 350};
+        int[] node4 = {113, 205, 453};
         int[] node5 = {3, 24, 5};
-        int[] node6 = {3, 2, 56};
+        int[] node6 = {73, 2, 56};
         test.addNode(node);
         test.addNode(node2);
         test.addNode(node3);
@@ -105,60 +135,9 @@ public class VoronoiTree {
         long endTime;
         long duration;
         startTime = System.nanoTime();
-        test.solve();
+        test.baseQueueSolve();
         endTime = System.nanoTime();
         duration = (endTime - startTime) / 1000000;
         System.out.println("Tree took " + duration +" ms");
     }
-//    public static void main(String[] args) {
-//        long startTime;
-//        long endTime;
-//        long duration;
-//        Voronoi3D test;
-//        test = new Voronoi3D(1000, 1000, 800);
-//        test.addNode(7, 7, 7);
-//        test.addNode(0, 0, 0);
-//        test.addNode(11, 11, 26);
-//        test.addNode(465, 2, 56);
-//        test.addNode(987, 78, 2);
-//        test.addNode(123, 123, 12);
-//        test.addNode(110, 122, 65);
-//        startTime = System.nanoTime();
-//        test.bruteForce();
-//        endTime = System.nanoTime();
-//        duration = (endTime - startTime) / 1000000;
-//        System.out.println("The brute force method took " + duration + " ms to calculate");
-//
-//        test = new Voronoi3D(1000, 1000, 800);
-//        test.addNode(7, 7, 7);
-//        test.addNode(0, 0, 0);
-//        test.addNode(11, 11, 26);
-//        test.addNode(465, 2, 56);
-//        test.addNode(987, 78, 2);
-//        test.addNode(123, 123, 12);
-//        test.addNode(110, 122, 65);
-//        startTime = System.nanoTime();
-//        test.solve(0, 999, 0, 999, 0, 799);
-//        endTime = System.nanoTime();
-//        duration = (endTime - startTime) / 1000000;
-//        System.out.println("The divide method took " + duration + " ms to calculate");
-//
-//        test = new Voronoi3D(1000, 1000, 800);
-//        test.addNode(7, 7, 7);
-//        test.addNode(0, 0, 0);
-//        test.addNode(11, 11, 26);
-//        test.addNode(465, 2, 56);
-//        test.addNode(987, 78, 2);
-//        test.addNode(123, 123, 12);
-//        test.addNode(110, 122, 65);
-//        startTime = System.nanoTime();
-//        test.solveRoughCut(0, 999, 0, 999, 0, 799);
-//        endTime = System.nanoTime();
-//        duration = (endTime - startTime) / 1000000;
-//        System.out.println("The rough divide method took " + duration + " ms to calculate");
-
-//        if (test2.print().equals(test3.print())) {
-//            System.out.println("Strings are the same");
-//        }
-//    }
 }
