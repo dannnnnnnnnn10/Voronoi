@@ -78,45 +78,36 @@ public class VoronoiTree implements Runnable {
     }
 
     private void recursiveSolve(Tree t) {
-        int[][] corners = t.getCorners();
-        boolean same = true;
-        int firstNode = getClosestNode(corners[0]);
-        for (int i = 1; i < 8; i++) {
-            if (getClosestNode(corners[i]) != firstNode) {
-                same = false;
-                break;
+//        int[][] corners = t.getCorners();
+//        boolean same = true;
+//        int firstNode = getClosestNode(corners[0]);
+//        for (int i = 1; i < 8; i++) {
+//            if (getClosestNode(corners[i]) != firstNode) {
+//                same = false;
+//                break;
+//            }
+//        }
+        if (!t.solveCorners(nodes)) {
+            ArrayList<Tree> children = t.propagate();
+            for (int i = 0; i < children.size(); i++) {
+                recursiveSolve(children.get(i));
             }
-        }
-        if (!same) {
-            int[][][] children = t.propagate();
-            for (int i = 0; i < children.length; i++) {
-                recursiveSolve(new Tree(children[i]));
-            }
-        }
-        else {
-            t.setClosestNode(firstNode);
         }
     }
 
     private void queueSolve(Tree t) {
-        int[][] corners = t.getCorners();
-        boolean same = true;
-        int firstNode = getClosestNode(corners[0]);
-        for (int i = 1; i < 8; i++) {
-            if (getClosestNode(corners[i]) != firstNode) {
-                same = false;
-                break;
-            }
-        }
-        if (!same) {
-            int[][][] children = t.propagate();
-            for (int i = 0; i < children.length; i++) {
-                queue.add(new Tree(children[i]));
-            }
-        }
-        else {
-            t.setClosestNode(firstNode);
-//            System.out.println(t);
+//        int[][] corners = t.getCorners();
+//        boolean same = true;
+//        int firstNode = getClosestNode(corners[0]);
+//        for (int i = 1; i < 8; i++) {
+//            if (getClosestNode(corners[i]) != firstNode) {
+//                same = false;
+//                break;
+//            }
+//        }
+        if (!t.solveCorners(nodes)) {
+            ArrayList<Tree> children = t.propagate();
+            queue.addAll(children);
         }
     }
 
@@ -132,7 +123,7 @@ public class VoronoiTree implements Runnable {
         int[][] params = new int[100][34];
         int index = 0;
         try {
-            Scanner scan = new Scanner(new File("MidxLow.csv"));
+            Scanner scan = new Scanner(new File("LowxLow.csv"));
                 while (scan.hasNextLine()) {
                     readFile[index] = scan.nextLine();
                     index++;
