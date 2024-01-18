@@ -201,20 +201,20 @@ public class RandomGen {
         return duration;
     }
 
-    private long treeSolution() {
-        long startTime;
-        long endTime;
-        long duration;
-        VoronoiTree test = new VoronoiTree(new int[]{x, y, z});
-        for (int i = 0; i < treeNodes.size(); i++) {
-            test.addNode(treeNodes.get(i));
-        }
-        startTime = System.nanoTime();
-        test.solve();
-        endTime = System.nanoTime();
-        duration = (endTime - startTime) / 1000000;
-        return duration;
-    }
+//    private long treeSolution() {
+//        long startTime;
+//        long endTime;
+//        long duration;
+//        VoronoiTree test = new VoronoiTree(new int[]{x, y, z});
+//        for (int i = 0; i < treeNodes.size(); i++) {
+//            test.addNode(treeNodes.get(i));
+//        }
+//        startTime = System.nanoTime();
+//        test.solve();
+//        endTime = System.nanoTime();
+//        duration = (endTime - startTime) / 1000000;
+//        return duration;
+//    }
 
     public String compareSolutions() {
         String result = "";
@@ -224,8 +224,8 @@ public class RandomGen {
 //        result += "Clean Divide: " + cleanDuration + " ms\n";
         long roughDuration = roughSolution();
         result += "Rough Divide: " + roughDuration + " ms\n";
-        long treeDuration = treeSolution();
-        result += "Tree Divide: " + treeDuration + " ms\n";
+//        long treeDuration = treeSolution();
+//        result += "Tree Divide: " + treeDuration + " ms\n";
 
 //        if (roughDuration < cleanDuration) {
 //            if (roughDuration < bruteDuration) {

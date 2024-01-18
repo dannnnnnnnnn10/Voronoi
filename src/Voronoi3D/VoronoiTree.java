@@ -8,7 +8,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class VoronoiTree implements Runnable {
 
-    private ArrayList<NodeForTree> nodeForTrees;
+    private ArrayList<int[]> nodes;
     private Tree tree;
     private ArrayList<String> results;
 
@@ -21,7 +21,7 @@ public class VoronoiTree implements Runnable {
             vars[i][1] = lengths[i];
         }
         tree = new Tree(vars);
-        this.nodeForTrees = new ArrayList<>();
+        this.nodes = new ArrayList<>();
         results = new ArrayList<>();
 
         queue = new ConcurrentLinkedQueue<>();
@@ -29,17 +29,13 @@ public class VoronoiTree implements Runnable {
     }
 
     public void addNode(int[] vars) {
-        nodeForTrees.add(new NodeForTree(vars));
+        nodes.add(vars);
     }
 
-    public void addNode(NodeForTree nodeForTree) {
-        nodeForTrees.add(nodeForTree);
-    }
-
-    private double calcDistance(int[] vars, NodeForTree nodeForTree) {
+    private double calcDistance(int[] vars, int[] node) {
         double sum = 0;
         for (int i = 0; i < vars.length; i++) {
-            sum += Math.pow(Math.abs(vars[i] - nodeForTree.getVars()[i]), 2);
+            sum += Math.pow(Math.abs(vars[i] - node[i]), 2);
         }
         return Math.pow(sum, 0.5);
     }
@@ -47,8 +43,8 @@ public class VoronoiTree implements Runnable {
     private int getClosestNode(int[] vars) {
         double dist = -1;
         int closestNode = -1;
-        for (int a = 0; a < nodeForTrees.size(); a++) {
-            double newDist = calcDistance(vars, nodeForTrees.get(a));
+        for (int a = 0; a < nodes.size(); a++) {
+            double newDist = calcDistance(vars, nodes.get(a));
             if (dist == -1) {
                 closestNode = a;
                 dist = newDist;
@@ -125,10 +121,10 @@ public class VoronoiTree implements Runnable {
 
     public static void main(String[] args) {
         String[] readFile = new String[100];
-        int[][] params = new int[100][754];
+        int[][] params = new int[100][34];
         int index = 0;
         try {
-            Scanner scan = new Scanner(new File("HighxHigh.csv"));
+            Scanner scan = new Scanner(new File("HighxLow.csv"));
                 while (scan.hasNextLine()) {
                     readFile[index] = scan.nextLine();
                     index++;
