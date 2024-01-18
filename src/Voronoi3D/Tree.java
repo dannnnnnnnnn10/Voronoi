@@ -24,29 +24,100 @@ public class Tree {
         int yHigh = variables[1][1];
         int zLow = variables[2][0];
         int zHigh = variables[2][1];
-        int xMid = xLow + (xHigh - xLow)/2;
-        int xMid2 = xMid+1;
-        if (xMid == xHigh) {
-            xMid2--;
+        if (xLow == xHigh && yLow == yHigh) {
+            int zMid = zLow + (zHigh - zLow) / 2;
+            int zMid2 = zMid + 1;
+            if (zMid == zHigh) {
+                zMid2--;
+            }
+            children.add(new Tree(new int[][]{new int[]{xLow, xHigh}, new int[]{yLow, yHigh}, new int[]{zLow, zMid}}));
+            children.add(new Tree(new int[][]{new int[]{xLow, xHigh}, new int[]{yLow, yHigh}, new int[]{zMid2, zHigh}}));
+        } else if (xLow == xHigh && zLow == zHigh) {
+            int yMid = yLow + (yHigh - yLow) / 2;
+            int yMid2 = yMid + 1;
+            if (yMid == yHigh) {
+                yMid2--;
+            }
+            children.add(new Tree(new int[][]{new int[]{xLow, xHigh}, new int[]{yLow, yMid}, new int[]{zLow, zHigh}}));
+            children.add(new Tree(new int[][]{new int[]{xLow, xHigh}, new int[]{yMid2, yHigh}, new int[]{zLow, zHigh}}));
+        } else if (yLow == yHigh && zLow == zHigh) {
+            int xMid = xLow + (xHigh - xLow) / 2;
+            int xMid2 = xMid + 1;
+            if (xMid == xHigh) {
+                xMid2--;
+            }
+            children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yLow, yHigh}, new int[]{zLow, zHigh}}));
+            children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yLow, yHigh}, new int[]{zLow, zHigh}}));
+        } else if (xLow == xHigh) {
+            int yMid = yLow + (yHigh - yLow) / 2;
+            int yMid2 = yMid + 1;
+            if (yMid == yHigh) {
+                yMid2--;
+            }
+            int zMid = zLow + (zHigh - zLow) / 2;
+            int zMid2 = zMid + 1;
+            if (zMid == zHigh) {
+                zMid2--;
+            }
+            children.add(new Tree(new int[][]{new int[]{xLow, xHigh}, new int[]{yLow, yMid}, new int[]{zLow, zMid}}));
+            children.add(new Tree(new int[][]{new int[]{xLow, xHigh}, new int[]{yMid2, yHigh}, new int[]{zLow, zMid}}));
+            children.add(new Tree(new int[][]{new int[]{xLow, xHigh}, new int[]{yLow, yMid}, new int[]{zMid2, zHigh}}));
+            children.add(new Tree(new int[][]{new int[]{xLow, xHigh}, new int[]{yMid2, yHigh}, new int[]{zMid2, zHigh}}));
+        } else if (yLow == yHigh) {
+            int xMid = xLow + (xHigh - xLow) / 2;
+            int xMid2 = xMid + 1;
+            if (xMid == xHigh) {
+                xMid2--;
+            }
+            int zMid = zLow + (zHigh - zLow) / 2;
+            int zMid2 = zMid + 1;
+            if (zMid == zHigh) {
+                zMid2--;
+            }
+            children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yLow, yHigh}, new int[]{zLow, zMid}}));
+            children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yLow, yHigh}, new int[]{zLow, zMid}}));
+            children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yLow, yHigh}, new int[]{zMid2, zHigh}}));
+            children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yLow, yHigh}, new int[]{zMid2, zHigh}}));
+        } else if (zLow == zHigh) {
+            int xMid = xLow + (xHigh - xLow) / 2;
+            int xMid2 = xMid + 1;
+            if (xMid == xHigh) {
+                xMid2--;
+            }
+            int yMid = yLow + (yHigh - yLow) / 2;
+            int yMid2 = yMid + 1;
+            if (yMid == yHigh) {
+                yMid2--;
+            }
+            children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yLow, yMid}, new int[]{zLow, zHigh}}));
+            children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yLow, yMid}, new int[]{zLow, zHigh}}));
+            children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yMid2, yHigh}, new int[]{zLow, zHigh}}));
+            children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yMid2, yHigh}, new int[]{zLow, zHigh}}));
+        } else {
+            int xMid = xLow + (xHigh - xLow) / 2;
+            int xMid2 = xMid + 1;
+            if (xMid == xHigh) {
+                xMid2--;
+            }
+            int yMid = yLow + (yHigh - yLow) / 2;
+            int yMid2 = yMid + 1;
+            if (yMid == yHigh) {
+                yMid2--;
+            }
+            int zMid = zLow + (zHigh - zLow) / 2;
+            int zMid2 = zMid + 1;
+            if (zMid == zHigh) {
+                zMid2--;
+            }
+            children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yLow, yMid}, new int[]{zLow, zMid}}));
+            children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yLow, yMid}, new int[]{zLow, zMid}}));
+            children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yMid2, yHigh}, new int[]{zLow, zMid}}));
+            children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yLow, yMid}, new int[]{zMid2, zHigh}}));
+            children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yMid2, yHigh}, new int[]{zLow, zMid}}));
+            children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yMid2, yHigh}, new int[]{zMid2, zHigh}}));
+            children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yLow, yMid}, new int[]{zMid2, zHigh}}));
+            children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yMid2, yHigh}, new int[]{zMid2, zHigh}}));
         }
-        int yMid = yLow + (yHigh - yLow)/2;
-        int yMid2 = yMid+1;
-        if (yMid == yHigh) {
-            yMid2--;
-        }
-        int zMid = zLow + (zHigh - zLow)/2;
-        int zMid2 = zMid+1;
-        if (zMid == zHigh) {
-            zMid2--;
-        }
-        children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yLow, yMid}, new int[]{zLow, zMid}}));
-        children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yLow, yMid}, new int[]{zLow, zMid}}));
-        children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yMid2, yHigh}, new int[]{zLow, zMid}}));
-        children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yLow, yMid}, new int[]{zMid2, zHigh}}));
-        children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yMid2, yHigh}, new int[]{zLow, zMid}}));
-        children.add(new Tree(new int[][]{new int[]{xLow, xMid}, new int[]{yMid2, yHigh}, new int[]{zMid2, zHigh}}));
-        children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yLow, yMid}, new int[]{zMid2, zHigh}}));
-        children.add(new Tree(new int[][]{new int[]{xMid2, xHigh}, new int[]{yMid2, yHigh}, new int[]{zMid2, zHigh}}));
         return children;
     }
 

@@ -1,6 +1,9 @@
 package Voronoi3D;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class VoronoiTree implements Runnable {
@@ -121,43 +124,81 @@ public class VoronoiTree implements Runnable {
 
 
     public static void main(String[] args) {
-        int[] lengths = {2906, 474, 480};
-        VoronoiTree test = new VoronoiTree(lengths);
-        int[] node = {1, 1, 1};
-        int[] node2 = {36, 55, 234};
-        int[] node3 = {35, 234, 350};
-        int[] node4 = {113, 205, 453};
-        int[] node5 = {3, 24, 58};
-        int[] node6 = {73, 276, 56};
-        test.addNode(node);
-        test.addNode(node2);
-        test.addNode(node3);
-        test.addNode(node4);
-        test.addNode(node5);
-        test.addNode(node6);
+        String[] readFile = new String[100];
+        int[][] params = new int[100][754];
+        int index = 0;
+        try {
+            Scanner scan = new Scanner(new File("HighxHigh.csv"));
+                while (scan.hasNextLine()) {
+                    readFile[index] = scan.nextLine();
+                    index++;
+                }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (int i = 0; i < readFile.length; i++) {
+            String[] line = readFile[i].replace("\"", "").replace(" ", "").split(",");
+            for (int j = 0; j < line.length; j++) {
+                params[i][j] = Integer.parseInt(line[j]);
+            }
+        }
         long startTime;
         long endTime;
         long duration;
-        test.initializeQueue();
-        startTime = System.nanoTime();
-        Thread t1 = new Thread(test);
-        Thread t2 = new Thread(test);
-        Thread t3 = new Thread(test);
-        Thread t4 = new Thread(test);
-        Thread t5 = new Thread(test);
-        Thread t6 = new Thread(test);
-        Thread t7 = new Thread(test);
-        Thread t8 = new Thread(test);
-        t1.start();
-        t2.start();
-        t3.start();
-        t4.start();
-        t5.start();
-        t6.start();
-        t7.start();
-        t8.start();
-        endTime = System.nanoTime();
-        duration = (endTime - startTime) / 1000000;
-        System.out.println("Tree took " + duration +" ms");
+        VoronoiTree tree;
+        for (int i = 0; i < params.length; i++) {
+            int[] lengths = {params[i][0], params[i][1], params[i][2]};
+            tree = new VoronoiTree(lengths);
+            for (int j = 4; j < (4 + params[i][3]*3); j+=3) {
+                int[] node = {params[i][j], params[i][j+1], params[i][j+2]};
+                tree.addNode(node);
+            }
+            startTime = System.nanoTime();
+            tree.solve();
+            endTime = System.nanoTime();
+            duration = (endTime - startTime) / 1000000;
+            System.out.println(duration);
+
+        }
+
+//        int[] lengths = {2906, 474, 480};
+//        VoronoiTree test = new VoronoiTree(lengths);
+//        int[] node = {1, 1, 1};
+//        int[] node2 = {36, 55, 234};
+//        int[] node3 = {35, 234, 350};
+//        int[] node4 = {113, 205, 453};
+//        int[] node5 = {3, 24, 58};
+//        int[] node6 = {73, 276, 56};
+//        test.addNode(node);
+//        test.addNode(node2);
+//        test.addNode(node3);
+//        test.addNode(node4);
+//        test.addNode(node5);
+//        test.addNode(node6);
+//        long startTime;
+//        long endTime;
+//        long duration;
+//        test.initializeQueue();
+//        startTime = System.nanoTime();
+//        Thread t1 = new Thread(test);
+//        Thread t2 = new Thread(test);
+//        Thread t3 = new Thread(test);
+//        Thread t4 = new Thread(test);
+//        Thread t5 = new Thread(test);
+//        Thread t6 = new Thread(test);
+//        Thread t7 = new Thread(test);
+//        Thread t8 = new Thread(test);
+//        t1.start();
+//        t2.start();
+//        t3.start();
+//        t4.start();
+//        t5.start();
+//        t6.start();
+//        t7.start();
+//        t8.start();
+//        endTime = System.nanoTime();
+//        duration = (endTime - startTime) / 1000000;
+//        System.out.println("Tree took " + duration +" ms");
     }
 }
