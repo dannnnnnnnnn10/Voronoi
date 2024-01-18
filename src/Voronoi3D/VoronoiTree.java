@@ -8,28 +8,34 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class VoronoiTree implements Runnable {
 
-    private ArrayList<int[]> nodes;
+    private int[][] nodes;
+    private int numNodes;
+    private int currentNodeCount;
     private Tree tree;
-    private ArrayList<String> results;
+//    private ArrayList<String> results;
 
     private ConcurrentLinkedQueue<Tree> queue;
 
-    public VoronoiTree(int[] lengths) {
+    public VoronoiTree(int[] lengths, int numNodes) {
         int[][] vars = new int[lengths.length][2];
         for (int i = 0; i < lengths.length; i++) {
             vars[i][0] = 0;
             vars[i][1] = lengths[i];
         }
         tree = new Tree(vars);
-        this.nodes = new ArrayList<>();
-        results = new ArrayList<>();
+        nodes = new int[numNodes][3];
+        currentNodeCount = 0;
+        this.numNodes = numNodes;
 
         queue = new ConcurrentLinkedQueue<>();
         queue.add(tree);
     }
 
     public void addNode(int[] vars) {
-        nodes.add(vars);
+        if (currentNodeCount < numNodes) {
+            nodes[currentNodeCount] = vars;
+            currentNodeCount++;
+        }
     }
 
     private double calcDistance(int[] vars, int[] node) {
@@ -43,8 +49,8 @@ public class VoronoiTree implements Runnable {
     private int getClosestNode(int[] vars) {
         double dist = -1;
         int closestNode = -1;
-        for (int a = 0; a < nodes.size(); a++) {
-            double newDist = calcDistance(vars, nodes.get(a));
+        for (int a = 0; a < numNodes; a++) {
+            double newDist = calcDistance(vars, nodes[a]);
             if (dist == -1) {
                 closestNode = a;
                 dist = newDist;
@@ -72,39 +78,41 @@ public class VoronoiTree implements Runnable {
     }
 
     private void recursiveSolve(Tree t) {
-        ArrayList<int[]> corners = t.getCorners();
+        int[][] corners = t.getCorners();
         boolean same = true;
-        int firstNode = getClosestNode(corners.get(0));
-        for (int i = 1; i < corners.size(); i++) {
-            if (getClosestNode(corners.get(i)) != firstNode) {
+        int firstNode = getClosestNode(corners[0]);
+        for (int i = 1; i < 8; i++) {
+            if (getClosestNode(corners[i]) != firstNode) {
                 same = false;
                 break;
             }
         }
         if (!same) {
-            ArrayList<Tree> children = t.propagate();
-            for (Tree a : children) {
-                recursiveSolve(a);
+            int[][][] children = t.propagate();
+            for (int i = 0; i < children.length; i++) {
+                recursiveSolve(new Tree(children[i]));
             }
         }
         else {
             t.setClosestNode(firstNode);
-            results.add(t.toString());
         }
     }
 
     private void queueSolve(Tree t) {
-        ArrayList<int[]> corners = t.getCorners();
+        int[][] corners = t.getCorners();
         boolean same = true;
-        int firstNode = getClosestNode(corners.get(0));
-        for (int i = 1; i < corners.size(); i++) {
-            if (getClosestNode(corners.get(i)) != firstNode) {
+        int firstNode = getClosestNode(corners[0]);
+        for (int i = 1; i < 8; i++) {
+            if (getClosestNode(corners[i]) != firstNode) {
                 same = false;
                 break;
             }
         }
         if (!same) {
-            queue.addAll(t.propagate());
+            int[][][] children = t.propagate();
+            for (int i = 0; i < children.length; i++) {
+                queue.add(new Tree(children[i]));
+            }
         }
         else {
             t.setClosestNode(firstNode);
@@ -112,11 +120,11 @@ public class VoronoiTree implements Runnable {
         }
     }
 
-    public void print() {
-        for (String r : results) {
-            System.out.println(r);
-        }
-    }
+//    public void print() {
+//        for (String r : results) {
+//            System.out.println(r);
+//        }
+//    }
 
 
     public static void main(String[] args) {
@@ -124,7 +132,7 @@ public class VoronoiTree implements Runnable {
         int[][] params = new int[100][34];
         int index = 0;
         try {
-            Scanner scan = new Scanner(new File("HighxLow.csv"));
+            Scanner scan = new Scanner(new File("MidxLow.csv"));
                 while (scan.hasNextLine()) {
                     readFile[index] = scan.nextLine();
                     index++;
@@ -145,7 +153,7 @@ public class VoronoiTree implements Runnable {
         VoronoiTree tree;
         for (int i = 0; i < params.length; i++) {
             int[] lengths = {params[i][0], params[i][1], params[i][2]};
-            tree = new VoronoiTree(lengths);
+            tree = new VoronoiTree(lengths, params[i][3]);
             for (int j = 4; j < (4 + params[i][3]*3); j+=3) {
                 int[] node = {params[i][j], params[i][j+1], params[i][j+2]};
                 tree.addNode(node);
