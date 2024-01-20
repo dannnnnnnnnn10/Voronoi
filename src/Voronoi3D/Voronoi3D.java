@@ -1,6 +1,9 @@
 package Voronoi3D;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Voronoi3D {
 
@@ -9,8 +12,10 @@ public class Voronoi3D {
     private int zLength;
     private ArrayList<Node> nodes;
     private int[][][] grid;
+    private long maxMemUsage;
 
     public Voronoi3D(int xLength, int yLength, int zLength) {
+        maxMemUsage = -1;
         this.xLength = xLength;
         this.yLength = yLength;
         this.zLength = zLength;
@@ -138,6 +143,11 @@ public class Voronoi3D {
                         grid[i][j][k] = value;
                     }
                 }
+            }
+            Runtime rt = Runtime.getRuntime();
+            long memUsage = rt.totalMemory() - rt.freeMemory();
+            if (memUsage > maxMemUsage) {
+                maxMemUsage = memUsage;
             }
         }
         else if (xHalfLength == 1 && yHalfLength == 1 && zHalfLength == 1) {
@@ -302,6 +312,11 @@ public class Voronoi3D {
                             grid[slice][i][j] = value;
                         }
                     }
+                    Runtime rt = Runtime.getRuntime();
+                    long memUsage = rt.totalMemory() - rt.freeMemory();
+                    if (memUsage > maxMemUsage) {
+                        maxMemUsage = memUsage;
+                    }
                 }
                 else if (xHalfLength == 1 && yHalfLength == 1) {
                     if (xLength != 2 || yLength != 2) {
@@ -310,6 +325,11 @@ public class Voronoi3D {
                                 if (grid[slice][i][j] == -1)
                                     grid[slice][i][j] = getClosestNode(slice, i, j);
                             }
+                        }
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
                         }
                     }
                     return;
@@ -362,6 +382,11 @@ public class Voronoi3D {
                             grid[i][slice][j] = value;
                         }
                     }
+                    Runtime rt = Runtime.getRuntime();
+                    long memUsage = rt.totalMemory() - rt.freeMemory();
+                    if (memUsage > maxMemUsage) {
+                        maxMemUsage = memUsage;
+                    }
                 }
                 else if (xHalfLength == 1 && yHalfLength == 1) {
                     if (xLength != 2 || yLength != 2) {
@@ -370,6 +395,11 @@ public class Voronoi3D {
                                 if (grid[i][slice][j] == -1)
                                     grid[i][slice][j] = getClosestNode(i, slice, j);
                             }
+                        }
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
                         }
                     }
                     return;
@@ -422,6 +452,11 @@ public class Voronoi3D {
                             grid[i][j][slice] = value;
                         }
                     }
+                    Runtime rt = Runtime.getRuntime();
+                    long memUsage = rt.totalMemory() - rt.freeMemory();
+                    if (memUsage > maxMemUsage) {
+                        maxMemUsage = memUsage;
+                    }
                 }
                 else if (xHalfLength == 1 && yHalfLength == 1) {
                     if (xLength != 2 || yLength != 2) {
@@ -430,6 +465,11 @@ public class Voronoi3D {
                                 if (grid[i][j][slice] == -1)
                                     grid[i][j][slice] = getClosestNode(i, j, slice);
                             }
+                        }
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
                         }
                     }
                     return;
@@ -532,6 +572,11 @@ public class Voronoi3D {
                         grid[i][j][k] = value;
                     }
                 }
+            }
+            Runtime rt = Runtime.getRuntime();
+            long memUsage = rt.totalMemory() - rt.freeMemory();
+            if (memUsage > maxMemUsage) {
+                maxMemUsage = memUsage;
             }
         }
         else if (xHalfLength == 1 && yHalfLength == 1 && zHalfLength == 1) {
@@ -671,8 +716,18 @@ public class Voronoi3D {
                                 grid[slice][i][j] = value;
                             }
                         }
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                     }
                     else if (xHalfLength == 1 && yHalfLength == 1) {
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                         return;
                     }
                     else if (xHalfLength == 1 && yHalfLength > 1) {
@@ -715,8 +770,18 @@ public class Voronoi3D {
                                 grid[i][slice][j] = value;
                             }
                         }
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                     }
                     else if (xHalfLength == 1 && yHalfLength == 1) {
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                         return;
                     }
                     else if (xHalfLength == 1 && yHalfLength > 1) {
@@ -759,8 +824,18 @@ public class Voronoi3D {
                                 grid[i][j][slice] = value;
                             }
                         }
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                     }
                     else if (xHalfLength == 1 && yHalfLength == 1) {
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                         return;
                     }
                     else if (xHalfLength == 1 && yHalfLength > 1) {
@@ -810,8 +885,18 @@ public class Voronoi3D {
                         for (int i = xMin; i <= xMax; i++) {
                             grid[i][slice1][slice2] = grid[xMin][slice1][slice2];
                         }
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                     }
                     else if(xHalfLength == 1) {
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                         return;
                     }
                     else {
@@ -829,8 +914,18 @@ public class Voronoi3D {
                         for (int i = xMin; i <= xMax; i++) {
                             grid[slice1][i][slice2] = grid[slice1][xMin][slice2];
                         }
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                     }
                     else if(xHalfLength == 1) {
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                         return;
                     }
                     else {
@@ -848,8 +943,18 @@ public class Voronoi3D {
                         for (int i = xMin; i <= xMax; i++) {
                             grid[slice1][slice2][i] = grid[slice1][slice2][xMin];
                         }
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                     }
                     else if(xHalfLength == 1) {
+                        Runtime rt = Runtime.getRuntime();
+                        long memUsage = rt.totalMemory() - rt.freeMemory();
+                        if (memUsage > maxMemUsage) {
+                            maxMemUsage = memUsage;
+                        }
                         return;
                     }
                     else {
@@ -874,6 +979,51 @@ public class Voronoi3D {
         return result;
     }
 
+    public long getMaxMemUsage() {
+        return maxMemUsage;
+    }
+
+    public static void main(String[] args) {
+        String[] readFile = new String[100];
+        int[][] params = new int[100][754];
+        int index = 0;
+        try {
+            Scanner scan = new Scanner(new File("LowxHigh.csv"));
+            while (scan.hasNextLine()) {
+                readFile[index] = scan.nextLine();
+                index++;
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (int i = 0; i < readFile.length; i++) {
+            String[] line = readFile[i].replace("\"", "").replace(" ", "").split(",");
+            for (int j = 0; j < line.length; j++) {
+                params[i][j] = Integer.parseInt(line[j]);
+            }
+        }
+        long startTime;
+        long endTime;
+        long duration;
+        Voronoi3D run;
+        for (int i = 0; i < params.length; i++) {
+            int[] lengths = {params[i][0], params[i][1], params[i][2]};
+            run = new Voronoi3D(params[i][0], params[i][1], params[i][2]);
+            for (int j = 4; j < (4 + params[i][3] * 3); j += 3) {
+                Node node = new Node(params[i][j], params[i][j + 1], params[i][j + 2]);
+                run.addNode(node);
+            }
+            startTime = System.nanoTime();
+            Runtime.getRuntime().gc();
+            run.solve(0, params[i][0] - 1, 0, params[i][1] - 1, 0, params[i][2] - 1);
+            endTime = System.nanoTime();
+            duration = (endTime - startTime) / 1000000;
+            System.out.println(duration);
+            System.out.println("Max memory used: " + run.getMaxMemUsage());
+
+        }
+    }
 //    public static void main(String[] args) {
 //        long startTime;
 //        long endTime;

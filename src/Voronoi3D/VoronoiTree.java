@@ -11,6 +11,7 @@ public class VoronoiTree implements Runnable {
     private int[][] nodes;
     private int numNodes;
     private int currentNodeCount;
+    private long maxMemUsage;
     private Tree tree;
 //    private ArrayList<String> results;
 
@@ -25,6 +26,7 @@ public class VoronoiTree implements Runnable {
         tree = new Tree(vars);
         nodes = new int[numNodes][3];
         currentNodeCount = 0;
+        maxMemUsage = -1;
         this.numNodes = numNodes;
 
         queue = new ConcurrentLinkedQueue<>();
@@ -88,9 +90,17 @@ public class VoronoiTree implements Runnable {
 //            }
 //        }
         if (!t.solveCorners(nodes)) {
-            ArrayList<Tree> children = t.propagate();
-            for (int i = 0; i < children.size(); i++) {
-                recursiveSolve(children.get(i));
+            Tree[] children = t.propagate();
+            for (int i = 0; i < children.length; i++) {
+                recursiveSolve(children[i]);
+            }
+        }
+        else {
+            Runtime rt = Runtime.getRuntime();
+//            rt.gc();
+            long memUsage = rt.totalMemory() - rt.freeMemory();
+            if (memUsage > maxMemUsage) {
+                maxMemUsage = memUsage;
             }
         }
     }
@@ -106,9 +116,15 @@ public class VoronoiTree implements Runnable {
 //            }
 //        }
         if (!t.solveCorners(nodes)) {
-            ArrayList<Tree> children = t.propagate();
-            queue.addAll(children);
+            Tree[] children = t.propagate();
+            for (int i = 0; i < children.length; i++) {
+                queue.add(children[i]);
+            }
         }
+    }
+
+    public long getMaxMemUsage() {
+        return maxMemUsage;
     }
 
 //    public void print() {
@@ -123,7 +139,7 @@ public class VoronoiTree implements Runnable {
         int[][] params = new int[100][34];
         int index = 0;
         try {
-            Scanner scan = new Scanner(new File("LowxLow.csv"));
+            Scanner scan = new Scanner(new File("HighxLow.csv"));
                 while (scan.hasNextLine()) {
                     readFile[index] = scan.nextLine();
                     index++;
@@ -150,10 +166,12 @@ public class VoronoiTree implements Runnable {
                 tree.addNode(node);
             }
             startTime = System.nanoTime();
+            Runtime.getRuntime().gc();
             tree.solve();
             endTime = System.nanoTime();
             duration = (endTime - startTime) / 1000000;
             System.out.println(duration);
+            System.out.println("Max memory used: " + tree.getMaxMemUsage());
 
         }
 
