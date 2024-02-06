@@ -2,7 +2,6 @@ package Voronoi3D;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -21,7 +20,7 @@ public class VoronoiTree implements Runnable {
         int[][] vars = new int[lengths.length][2];
         for (int i = 0; i < lengths.length; i++) {
             vars[i][0] = 0;
-            vars[i][1] = lengths[i];
+            vars[i][1] = lengths[i]-1;
         }
         tree = new Tree(vars);
         nodes = new int[numNodes][3];
@@ -127,19 +126,17 @@ public class VoronoiTree implements Runnable {
         return maxMemUsage;
     }
 
-//    public void print() {
-//        for (String r : results) {
-//            System.out.println(r);
-//        }
-//    }
+    public String print() {
+        return tree.toString();
+    }
 
 
     public static void main(String[] args) {
         String[] readFile = new String[100];
-        int[][] params = new int[100][34];
+        int[][] params = new int[100][754];
         int index = 0;
         try {
-            Scanner scan = new Scanner(new File("HighxLow.csv"));
+            Scanner scan = new Scanner(new File("LowxHigh.csv"));
                 while (scan.hasNextLine()) {
                     readFile[index] = scan.nextLine();
                     index++;
@@ -158,15 +155,48 @@ public class VoronoiTree implements Runnable {
         long endTime;
         long duration;
         VoronoiTree tree;
-        for (int i = 0; i < params.length; i++) {
+
+        boolean converge = false;
+        long lastMemUsage = -1;
+        while (!converge) {
+            int[] lengths = {params[0][0], params[0][1], params[0][2]};
+            tree = new VoronoiTree(lengths, params[0][3]);
+            for (int j = 4; j < (4 + params[0][3]*3); j+=3) {
+                int[] node = {params[0][j], params[0][j+1], params[0][j+2]};
+                tree.addNode(node);
+            }
+            Runtime rt = Runtime.getRuntime();
+            rt.gc();
+            startTime = System.nanoTime();
+//            long memUsage = rt.totalMemory() - rt.freeMemory();
+//            System.out.println("Memory being used pre-solve call: " + memUsage);
+            tree.solve();
+            endTime = System.nanoTime();
+            duration = (endTime - startTime) / 1000000;
+            System.out.println(duration);
+            System.out.println("Max memory used: " + tree.getMaxMemUsage());
+            if (Math.abs(tree.getMaxMemUsage()-lastMemUsage) > tree.getMaxMemUsage()*0.01) {
+                System.out.println("Not yet converged");
+                lastMemUsage = tree.getMaxMemUsage();
+            }
+            else {
+                System.out.println("Converged");
+                converge = true;
+            }
+        }
+
+        for (int i = 1; i < params.length; i++) {
             int[] lengths = {params[i][0], params[i][1], params[i][2]};
             tree = new VoronoiTree(lengths, params[i][3]);
             for (int j = 4; j < (4 + params[i][3]*3); j+=3) {
                 int[] node = {params[i][j], params[i][j+1], params[i][j+2]};
                 tree.addNode(node);
             }
+            Runtime rt = Runtime.getRuntime();
+            rt.gc();
             startTime = System.nanoTime();
-            Runtime.getRuntime().gc();
+//            long memUsage = rt.totalMemory() - rt.freeMemory();
+//            System.out.println("Memory being used pre-solve call: " + memUsage);
             tree.solve();
             endTime = System.nanoTime();
             duration = (endTime - startTime) / 1000000;

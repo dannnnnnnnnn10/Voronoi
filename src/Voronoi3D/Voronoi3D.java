@@ -988,7 +988,7 @@ public class Voronoi3D {
         int[][] params = new int[100][754];
         int index = 0;
         try {
-            Scanner scan = new Scanner(new File("LowxHigh.csv"));
+            Scanner scan = new Scanner(new File("HighxHigh.csv"));
             while (scan.hasNextLine()) {
                 readFile[index] = scan.nextLine();
                 index++;
