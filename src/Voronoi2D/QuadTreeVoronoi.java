@@ -228,14 +228,14 @@ public class QuadTreeVoronoi implements Runnable {
 
 		// int maxValue = IntStream.range(1,twoToN/2).map(e ->
 		// findClosestSeed(e)).reduce(0,Integer::max);
-		long startTime = System.nanoTime();
-		recursiveQuad(p1, p2, p3, p4);
-		long endTime = System.nanoTime();
-		long duration = (endTime - startTime) / 1000000;
-		System.out.println("Sequential: " + duration + " milliseconds with " + n + " seeds.");
+//		long startTime = System.nanoTime();
+//		recursiveQuad(p1, p2, p3, p4);
+//		long endTime = System.nanoTime();
+//		long duration = (endTime - startTime) / 1000000;
+//		System.out.println("Sequential: " + duration + " milliseconds with " + n + " seeds.");
 		// IntStream.range(0,SIZE*SIZE).forEach(e -> findClosestSeed(new
 		// Voronoi2D.Point(e%SIZE,e/SIZE)));
-		startTime = System.nanoTime();
+		long startTime = System.nanoTime();
 		test.initializeQueue();
 		for (int i = 0; i < numThreads; i++) {
 			pool.submit(test);
@@ -246,8 +246,8 @@ public class QuadTreeVoronoi implements Runnable {
 		} catch (InterruptedException e) {
 			throw new RuntimeException(e);
 		}
-		endTime = System.nanoTime();
-		duration = (endTime - startTime) / 1000000;
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime) / 1000000;
 		System.out.println("Parallel: " + duration + " milliseconds with " + n + " seeds.");
 
 //		for (int i = 0; i < SIZE; i++) {
