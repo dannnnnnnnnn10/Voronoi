@@ -1,9 +1,14 @@
 package Voronoi3D;
 
+import Voronoi2D.Point;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class VoronoiTree implements Runnable {
 
@@ -70,12 +75,22 @@ public class VoronoiTree implements Runnable {
 
     public void run() {
         while (!queue.isEmpty()){
-            queueSolve(queue.poll());
+            if (queue.size() < 8) {
+                if (queue.peek() != null) {
+                    queueSolve(queue.poll(), 2);
+                }
+
+            }
+            else {
+                if (queue.peek() != null) {
+                    queueSolve(queue.poll(), 1);
+                }
+            }
         }
     }
 
     public void initializeQueue() {
-        queueSolve(queue.poll());
+        queueSolve(queue.poll(), 1);
     }
 
     private void recursiveSolve(Tree t) {
@@ -104,7 +119,7 @@ public class VoronoiTree implements Runnable {
         }
     }
 
-    private void queueSolve(Tree t) {
+    private void queueSolve(Tree t, int depth) {
 //        int[][] corners = t.getCorners();
 //        boolean same = true;
 //        int firstNode = getClosestNode(corners[0]);
@@ -115,9 +130,17 @@ public class VoronoiTree implements Runnable {
 //            }
 //        }
         if (!t.solveCorners(nodes)) {
-            Tree[] children = t.propagate();
-            for (int i = 0; i < children.length; i++) {
-                queue.add(children[i]);
+            if (depth == 0) {
+                Tree[] children = t.propagate();
+                for (int i = 0; i < children.length; i++) {
+                    queue.add(children[i]);
+                }
+            }
+            else {
+                Tree[] children = t.propagate();
+                for (int i = 0; i < children.length; i++) {
+                    queueSolve(children[i], depth - 1);
+                }
             }
         }
     }
@@ -200,8 +223,27 @@ public class VoronoiTree implements Runnable {
             tree.solve();
             endTime = System.nanoTime();
             duration = (endTime - startTime) / 1000000;
-            System.out.println(duration);
+            System.out.println("Sequential: " + duration);
             System.out.println("Max memory used: " + tree.getMaxMemUsage());
+
+            int numThreads = 8;
+            System.out.println("" + numThreads);
+
+            ExecutorService pool = Executors.newFixedThreadPool(numThreads);
+            startTime = System.nanoTime();
+            tree.initializeQueue();
+            for (int k = 0; i < numThreads; k++) {
+                pool.submit(tree);
+            }
+            pool.shutdown();
+            try {
+                pool.awaitTermination(10, TimeUnit.MINUTES);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            endTime = System.nanoTime();
+            duration = (endTime - startTime) / 1000000;
+            System.out.println("Parallel: " + duration);
 
         }
 
