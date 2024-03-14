@@ -223,13 +223,15 @@ public class QuadTreeVoronoi implements Runnable {
 
 		QuadTreeVoronoi test = new QuadTreeVoronoi(a);
 
-		int numThreads = 8;
+		int numThreads = Runtime.getRuntime().availableProcessors();
+		System.out.println("" + numThreads);
 
 		ExecutorService pool = Executors.newFixedThreadPool(numThreads);
 
 		// int maxValue = IntStream.range(1,twoToN/2).map(e ->
 		// findClosestSeed(e)).reduce(0,Integer::max);
 		long startTime = System.nanoTime();
+//		recursiveQuad(p1, p2, p3, p4);
 		// IntStream.range(0,SIZE*SIZE).forEach(e -> findClosestSeed(new
 		// Voronoi2D.Point(e%SIZE,e/SIZE)));
 		test.initializeQueue();
