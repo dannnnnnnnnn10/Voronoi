@@ -4,6 +4,9 @@ import Voronoi3D.Tree;
 
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class QuadTreeVoronoi implements Runnable {
 
@@ -68,10 +71,17 @@ public class QuadTreeVoronoi implements Runnable {
 	public void run() {
 		while (!queue.isEmpty()){
 			if (queue.size() < 8) {
-				queueQuad(queue.poll(), 2);
+				Point[] p = queue.poll();
+				if (p != null) {
+					queueQuad(p, 2);
+				}
+
 			}
 			else {
-				queueQuad(queue.poll(), 1);
+				Point[] p = queue.poll();
+				if (p != null) {
+					queueQuad(p, 1);
+				}
 			}
 		}
 	}
@@ -213,13 +223,25 @@ public class QuadTreeVoronoi implements Runnable {
 
 		QuadTreeVoronoi test = new QuadTreeVoronoi(a);
 
+		int numThreads = 8;
+
+		ExecutorService pool = Executors.newFixedThreadPool(numThreads);
+
 		// int maxValue = IntStream.range(1,twoToN/2).map(e ->
 		// findClosestSeed(e)).reduce(0,Integer::max);
 		long startTime = System.nanoTime();
 		// IntStream.range(0,SIZE*SIZE).forEach(e -> findClosestSeed(new
 		// Voronoi2D.Point(e%SIZE,e/SIZE)));
 		test.initializeQueue();
-		test.run();
+		for (int i = 0; i < numThreads; i++) {
+			pool.submit(test);
+		}
+		pool.shutdown();
+		try {
+			pool.awaitTermination(10, TimeUnit.MINUTES);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime) / 1000000;
 		System.out.println("Time for quad tree Voronoi: " + duration + " miliseconds with " + n + " seeds.");
