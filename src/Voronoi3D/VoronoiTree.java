@@ -225,13 +225,13 @@ public class VoronoiTree implements Runnable {
 //            System.out.println("Sequential: " + duration);
 //            System.out.println("Max memory used: " + tree.getMaxMemUsage());
 
-            int numThreads = 8;
+            int numThreads = 20;
             System.out.println("" + numThreads);
 
             ExecutorService pool = Executors.newFixedThreadPool(numThreads);
             startTime = System.nanoTime();
             tree.initializeQueue();
-            for (int k = 0; i < numThreads; k++) {
+            for (int k = 0; k < numThreads; k++) {
                 pool.submit(tree);
             }
             pool.shutdown();
@@ -245,44 +245,5 @@ public class VoronoiTree implements Runnable {
             System.out.println("Parallel: " + duration);
 
         }
-
-//        int[] lengths = {2906, 474, 480};
-//        VoronoiTree test = new VoronoiTree(lengths);
-//        int[] node = {1, 1, 1};
-//        int[] node2 = {36, 55, 234};
-//        int[] node3 = {35, 234, 350};
-//        int[] node4 = {113, 205, 453};
-//        int[] node5 = {3, 24, 58};
-//        int[] node6 = {73, 276, 56};
-//        test.addNode(node);
-//        test.addNode(node2);
-//        test.addNode(node3);
-//        test.addNode(node4);
-//        test.addNode(node5);
-//        test.addNode(node6);
-//        long startTime;
-//        long endTime;
-//        long duration;
-//        test.initializeQueue();
-//        startTime = System.nanoTime();
-//        Thread t1 = new Thread(test);
-//        Thread t2 = new Thread(test);
-//        Thread t3 = new Thread(test);
-//        Thread t4 = new Thread(test);
-//        Thread t5 = new Thread(test);
-//        Thread t6 = new Thread(test);
-//        Thread t7 = new Thread(test);
-//        Thread t8 = new Thread(test);
-//        t1.start();
-//        t2.start();
-//        t3.start();
-//        t4.start();
-//        t5.start();
-//        t6.start();
-//        t7.start();
-//        t8.start();
-//        endTime = System.nanoTime();
-//        duration = (endTime - startTime) / 1000000;
-//        System.out.println("Tree took " + duration +" ms");
     }
 }
