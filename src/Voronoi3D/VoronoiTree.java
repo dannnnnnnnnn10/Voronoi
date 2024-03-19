@@ -75,15 +75,15 @@ public class VoronoiTree implements Runnable {
 
     public void run() {
         while (!queue.isEmpty()){
-            if (queue.size() < 8) {
+            if (queue.size() < 20) {
                 if (queue.peek() != null) {
-                    queueSolve(queue.poll(), 2);
+                    queueSolve(queue.poll(), 5);
                 }
 
             }
             else {
                 if (queue.peek() != null) {
-                    queueSolve(queue.poll(), 1);
+                    queueSolve(queue.poll(), 4);
                 }
             }
         }
@@ -158,7 +158,7 @@ public class VoronoiTree implements Runnable {
         int[][] params = new int[100][754];
         int index = 0;
         try {
-            Scanner scan = new Scanner(new File("LowxHigh.csv"));
+            Scanner scan = new Scanner(new File("HighxHigh.csv"));
                 while (scan.hasNextLine()) {
                     readFile[index] = scan.nextLine();
                     index++;
@@ -207,7 +207,7 @@ public class VoronoiTree implements Runnable {
 //            }
 //        }
 
-        for (int i = 1; i < params.length; i++) {
+        for (int i = 12; i < params.length; i++) {
             int[] lengths = {params[i][0], params[i][1], params[i][2]};
             tree = new VoronoiTree(lengths, params[i][3]);
             for (int j = 4; j < (4 + params[i][3]*3); j+=3) {
@@ -226,7 +226,7 @@ public class VoronoiTree implements Runnable {
 //            System.out.println("Max memory used: " + tree.getMaxMemUsage());
 
             int numThreads = 20;
-            System.out.println("" + numThreads);
+//            System.out.println("" + numThreads);
 
             ExecutorService pool = Executors.newFixedThreadPool(numThreads);
             startTime = System.nanoTime();
@@ -236,13 +236,13 @@ public class VoronoiTree implements Runnable {
             }
             pool.shutdown();
             try {
-                pool.awaitTermination(10, TimeUnit.MINUTES);
+                pool.awaitTermination(100, TimeUnit.MINUTES);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             endTime = System.nanoTime();
             duration = (endTime - startTime) / 1000000;
-            System.out.println("Parallel: " + duration);
+            System.out.println("" + duration);
 
         }
     }
