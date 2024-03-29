@@ -72,20 +72,20 @@ public class QuadTreeVoronoi implements Runnable {
 		while (!queue.isEmpty()){
 			if (queue.size() < 8) {
 				if (queue.peek() != null) {
-					queueQuad(queue.poll(), 2);
+					queueQuad(queue.poll(), 7);
 				}
 
 			}
 			else {
 				if (queue.peek() != null) {
-					queueQuad(queue.poll(), 1);
+					queueQuad(queue.poll(), 7);
 				}
 			}
 		}
 	}
 
 	public void initializeQueue() {
-		queueQuad(queue.poll(), 2);
+		queueQuad(queue.poll(), 3);
 	}
 
 	public void queueQuad(Point[] corners, int depth) {

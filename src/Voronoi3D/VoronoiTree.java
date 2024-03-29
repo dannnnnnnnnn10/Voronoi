@@ -77,20 +77,20 @@ public class VoronoiTree implements Runnable {
         while (!queue.isEmpty()){
             if (queue.size() < 20) {
                 if (queue.peek() != null) {
-                    queueSolve(queue.poll(), 5);
+                    queueSolve(queue.poll(), 8);
                 }
 
             }
             else {
                 if (queue.peek() != null) {
-                    queueSolve(queue.poll(), 4);
+                    queueSolve(queue.poll(), 8);
                 }
             }
         }
     }
 
     public void initializeQueue() {
-        queueSolve(queue.poll(), 1);
+        queueSolve(queue.poll(), 2);
     }
 
     private void recursiveSolve(Tree t) {
@@ -142,6 +142,14 @@ public class VoronoiTree implements Runnable {
                 }
             }
         }
+        else {
+            Runtime rt = Runtime.getRuntime();
+//            rt.gc();
+            long memUsage = rt.totalMemory() - rt.freeMemory();
+            if (memUsage > maxMemUsage) {
+                maxMemUsage = memUsage;
+            }
+        }
     }
 
     public long getMaxMemUsage() {
@@ -155,10 +163,10 @@ public class VoronoiTree implements Runnable {
 
     public static void main(String[] args) {
         String[] readFile = new String[100];
-        int[][] params = new int[100][754];
+        int[][] params = new int[100][34];
         int index = 0;
         try {
-            Scanner scan = new Scanner(new File("HighxHigh.csv"));
+            Scanner scan = new Scanner(new File("HighxLow.csv"));
                 while (scan.hasNextLine()) {
                     readFile[index] = scan.nextLine();
                     index++;
@@ -207,7 +215,7 @@ public class VoronoiTree implements Runnable {
 //            }
 //        }
 
-        for (int i = 12; i < params.length; i++) {
+        for (int i = 0; i < params.length; i++) {
             int[] lengths = {params[i][0], params[i][1], params[i][2]};
             tree = new VoronoiTree(lengths, params[i][3]);
             for (int j = 4; j < (4 + params[i][3]*3); j+=3) {
@@ -227,7 +235,7 @@ public class VoronoiTree implements Runnable {
 
             int numThreads = 20;
 //            System.out.println("" + numThreads);
-
+            Runtime.getRuntime().gc();
             ExecutorService pool = Executors.newFixedThreadPool(numThreads);
             startTime = System.nanoTime();
             tree.initializeQueue();
@@ -242,7 +250,7 @@ public class VoronoiTree implements Runnable {
             }
             endTime = System.nanoTime();
             duration = (endTime - startTime) / 1000000;
-            System.out.println("" + duration);
+            System.out.println("" + tree.getMaxMemUsage());
 
         }
     }
